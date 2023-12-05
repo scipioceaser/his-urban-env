@@ -14,3 +14,4 @@ rstudio_clear_plots = function()
 }
 
 rstudio_clear_plots()
+12
