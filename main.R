@@ -14,4 +14,5 @@ rstudio_clear_plots = function()
 }
 
 rstudio_clear_plots()
+print("1000")
 1111
