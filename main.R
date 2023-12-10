@@ -39,10 +39,10 @@ data1890dec = read_excel("/Users/robertjastrzebski/Desktop/Utrecht\ RMA/Methods\
 ##1890
 
 water_borne1890jan <- rbind(data1890jan[46, ], data1890jan[47, ], data1890jan[80, ], data1890jan[95, ])
-water_borne1890feb <- rbind(data1890feb[36, ], data1890feb[64, ], data1890feb[82, ])
-water_borne1890mar <- rbind(data1890mar[34, ], data1890mar[63, ], data1890mar[78, ])
-water_borne1890apr <- rbind(data1890apr[46, ], data1890apr[70, ], data1890apr[84, ])
-water_borne1890may <- rbind(data1890may[45, ], data1890may[74, ], data1890may[87, ])
+water_borne1890feb <- rbind(data1890feb[36, ], data1890feb[64, ], data1890feb[79, ], data1890feb[82, ])
+water_borne1890mar <- rbind(data1890mar[34, ], data1890mar[63, ], data1890mar[73, ], data1890mar[78, ])
+water_borne1890apr <- rbind(data1890apr[46, ], data1890apr[70, ], data1890apr[80, ], data1890apr[84, ])
+water_borne1890may <- rbind(data1890may[45, ], data1890may[74, ], data1890may[84, ], data1890may[87, ])
 water_borne1890jun <- rbind(data1890jun[36, ], data1890jun[37, ], data1890jun[67, ], data1890jun[81, ])
 water_borne1890jul <- rbind(data1890jul[44, ], data1890jul[45, ], data1890jul[76, ], data1890jul[88, ])
 water_borne1890aug <- rbind(data1890aug[37, ], data1890aug[38, ], data1890aug[62, ], data1890aug[74, ])
@@ -64,5 +64,49 @@ data1910fy = read_excel("/Users/robertjastrzebski/Desktop/Utrecht\ RMA/Methods\ 
 
 water_borne1910fy <- rbind(data1910fy[8, ], data1910fy[18, ], data1910fy[19, ])
 
+object_list <- list(water_borne1890jan, water_borne1890feb, water_borne1890mar, 
+                    water_borne1890apr, water_borne1890may, water_borne1890jun, 
+                    water_borne1890jul, water_borne1890aug, water_borne1890sep, 
+                    water_borne1890oct, water_borne1890dec)
 
+object_list <- lapply(object_list, function(x) x[is.numeric(x)])
+                    
+sum_waterborne1890 <- Reduce('+', object_list)
+
+#Could not sum because of presence of non-numeric values, so used 
+#custom function
+
+# Custom function to convert columns to numeric, handling non-numeric characters
+convert_to_numeric <- function(df) {
+  for (i in 1:ncol(df)) {
+    if (!is.numeric(df[[i]])) {
+      df[[i]] <- as.numeric(as.character(df[[i]]))
+    }
+  }
+  return(df)
+}
+
+
+water_borne1890jan_numeric <- convert_to_numeric(water_borne1890jan)
+water_borne1890feb_numeric <- convert_to_numeric(water_borne1890feb)
+water_borne1890mar_numeric <- convert_to_numeric(water_borne1890mar)
+water_borne1890apr_numeric <- convert_to_numeric(water_borne1890apr)
+water_borne1890may_numeric <- convert_to_numeric(water_borne1890may)
+water_borne1890jun_numeric <- convert_to_numeric(water_borne1890jun)
+water_borne1890jul_numeric <- convert_to_numeric(water_borne1890jul)
+water_borne1890aug_numeric <- convert_to_numeric(water_borne1890aug)
+water_borne1890sep_numeric <- convert_to_numeric(water_borne1890sep)
+water_borne1890oct_numeric <- convert_to_numeric(water_borne1890oct)
+water_borne1890dec_numeric <- convert_to_numeric(water_borne1890dec)
+
+
+
+object_list <- list(water_borne1890jan_numeric, water_borne1890feb_numeric, water_borne1890mar_numeric,
+                    water_borne1890apr_numeric, water_borne1890may_numeric, water_borne1890jun_numeric,
+                    water_borne1890jul_numeric, water_borne1890aug_numeric, water_borne1890sep_numeric, 
+                    water_borne1890oct_numeric, water_borne1890dec_numeric)
+
+sum_waterborne1890 <- Reduce('+', object_list)
+
+sum_waterborne1890
 
