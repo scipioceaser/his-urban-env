@@ -36,6 +36,8 @@ data1890oct = read_excel("/Users/robertjastrzebski/Desktop/Utrecht RMA/Methods -
 #We are missing data for November - Likely does not make a huge difference as waterborne illnesses generally peak during periods of warm weather#
 data1890dec = read_excel("/Users/robertjastrzebski/Desktop/Utrecht\ RMA/Methods\ -\ Quantitative/Project/philadelphia/Philadelphia_1890/1890_WL-SID452,_TID6171,_1890-Philadelphia,_Interments_December_1890,_1890,_p590-07.xls")
 
+##1890
+
 water_borne1890jan <- rbind(data1890jan[46, ], data1890jan[47, ], data1890jan[80, ], data1890jan[95, ])
 water_borne1890feb <- rbind(data1890feb[36, ], data1890feb[64, ], data1890feb[82, ])
 water_borne1890mar <- rbind(data1890mar[34, ], data1890mar[63, ], data1890mar[78, ])
@@ -50,6 +52,17 @@ water_borne1890dec <- rbind(data1890dec[35, ], data1890dec[36, ], data1890dec[63
 
 water_borne1890dec
 
-data1900 = read_excel("")
+#fy is full year, our data from 1890 is monthly, denotes the difference in data recording#
+
+##1900
+data1900fy = read_excel("/Users/robertjastrzebski/Desktop/Utrecht\ RMA/Methods\ -\ Quantitative/Project/philadelphia/Philadelphia_1900/1900_WL-303_3112_1900-Deaths_by_Cause_1900,_p156-95.xls")
+
+water_borne1900fy <- rbind(data1900fy[84, ], data1900fy[85, ], data1900fy[122, ], data1900fy[138, ])
+
+##1910
+data1910fy = read_excel("/Users/robertjastrzebski/Desktop/Utrecht\ RMA/Methods\ -\ Quantitative/Project/philadelphia/Philadelphia_1910/1910_WL-SID314,_TID3344,_1910-Philadelphia,_Causes_of_Death_Distributed_By_Ward_1910,_pgs_unknown.xlsx")
+
+water_borne1910fy <- rbind(data1910fy[8, ], data1910fy[18, ], data1910fy[19, ])
+
 
 
