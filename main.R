@@ -20,8 +20,5 @@ library("readxl")
 data = read_excel("/Users/robertjastrzebski/Desktop/Utrecht RMA/Methods - Quantitative/Project/philadelphia/Philadelphia_1890/1890_WL-SID452,_TID6141,_1890-Philadelphia,_Interments_July_1890,_pg_490-09.xls")
 library("data.table")
 
-cholera <- rbind(data[37, ], data[38, ])
-
-cholera
-
-      
+water_borne <- rbind(data[44, ], data[45, ], data[76, ], data[88, ])
+water_borne      
