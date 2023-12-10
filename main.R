@@ -21,4 +21,4 @@ data = read_excel("/Users/robertjastrzebski/Desktop/Utrecht RMA/Methods - Quanti
 library("data.table")
 
 water_borne <- rbind(data[44, ], data[45, ], data[76, ], data[88, ])
-water_borne      
+water_borne
