@@ -41,7 +41,8 @@ data1890oct = read_excel("data/philadelphia/Philadelphia_1890/1890_WL-SID452,_TI
 #We are missing data for November - Likely does not make a huge difference as waterborne illnesses generally peak during periods of warm weather#
 data1890dec = read_excel("data/philadelphia/Philadelphia_1890/1890_WL-SID452,_TID6171,_1890-Philadelphia,_Interments_December_1890,_1890,_p590-07.xls")
 
-##1890
+##1890 #had to include malaria counts feb-may because whoever was recording this decided to just put cholera all in one category, made the data frames different sizes which made summing a nightmare.
+#Malaria counts not too significant, still a waterborne disease so indicitave of sanitary infrastructure
 
 water_borne1890jan <- rbind(data1890jan[46, ], data1890jan[47, ], data1890jan[80, ], data1890jan[95, ])
 water_borne1890feb <- rbind(data1890feb[36, ], data1890feb[64, ], data1890feb[79, ], data1890feb[82, ])
@@ -134,3 +135,6 @@ if (F) {
     
     sum_waterborne1890
 }
+
+
+
