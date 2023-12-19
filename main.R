@@ -80,6 +80,7 @@ water_borne = as.data.table(rbind(Reduce(function(x, y) merge(x, y, all=TRUE), o
 
 # NOTE(Alex): Then we replace all the garbage values with 0.
 #       Whoever decided to insert two different strings to represent NA, I am going to strangle.
+# TODO(Alex): Check that the five dots actually mean zero, or indicate "not recorded"
 water_borne[water_borne == "….."] <- 0
 water_borne[water_borne == "....."] <- 0
 water_borne[water_borne == "…../..."] <- 0

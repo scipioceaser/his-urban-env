@@ -51,7 +51,7 @@ plot_pipe_density_slice = function(water)
 {
     ws = as.data.table(ward_shape)
     ws = ws[order(Ward_Num)]
-    
+ 	   
     intersection = as.data.table(st_intersection(ward_shape, st_as_sf(water)))
     intersection[W_PipeLeng == 8888] = 0
     
