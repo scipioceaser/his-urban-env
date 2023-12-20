@@ -63,7 +63,7 @@ water_borne1890dec
 ##1900
 data1900fy = read_excel("data/philadelphia/Philadelphia_1900/1900_WL-303_3112_1900-Deaths_by_Cause_1900,_p156-95.xls")
 
-water_borne1900fy <- rbind(data1900fy[84, ], data1900fy[85, ], data1900fy[122, ], data1900fy[138, ])
+water_borne1900fy <- rbind(data1900fy[84, ], data1900fy[85, ], data1900fy[122, ], data1900fy[138, ], data1900fy[309, ], data1900fy[200, ])
 
 ##1910
 data1910fy = read_excel("data/philadelphia/Philadelphia_1910/1910_WL-SID314,_TID3344,_1910-Philadelphia,_Causes_of_Death_Distributed_By_Ward_1910,_pgs_unknown.xlsx")
@@ -103,6 +103,55 @@ water_borne_trans = water_borne_trans[c(-1), ]
 water_borne_numeric = apply(water_borne_trans, 2, as.numeric)
 water_borne_numeric = sapply(unique(colnames(water_borne_numeric)), function(x) rowSums(water_borne_numeric[, grepl(x, colnames(water_borne_numeric))]))
 
+clean_data_table = function(table)
+{
+	table[table == "….."] <- 0
+	table[table == "....."] <- 0
+	table[table == "......"] <- 0
+	table[table == "…../..."] <- 0
+	table[is.na(table)] <- 0
+	table[table == "2....."] <- 2
+	table[table == "......."] <- 0
+	table[table == "...."] <- 0
+
+	return(table)
+}
+
+water_1890 = clean_data_table(as.data.table(water_borne_numeric))
+
+# Second row is the total incidence of disease.
+water_1900 = clean_data_table(as.data.table(water_borne1900fy))
+water_1910 = clean_data_table(as.data.table(water_borne1910fy))
+
+# In the source sheet the second and third columns correspond to male and female, summing them
+# gives a total.
+water_1910[, 2] = lapply(water_1910[, 2], as.numeric)
+water_1910[, 3] = lapply(water_1910[, 3], as.numeric)
+
+# disease_table = data.table("Year" = c(1890, 1900, 1910),
+						   # "Cholera" = c(water_1890
+water_1910$Total = water_1910[, 2] + water_1910[, 3]
+
+colnames(water_1890) = gsub(" ", "_", colnames(water_1890))
+colnames(water_1890)[2] = "Cholera_Morbus"
+colnames(water_1890)[3] = "Typhoid"
+water_1890[, Cholera := Cholera_Morbus + CHOLERA_INFANTUM]
+
+# The data is poorly organized and badly translated to R, so magic indicis work better than anything else.
+disease_table = data.table(Year = c(1890, 1900, 1910),
+						   Cholera = c(sum(water_1890$Cholera), as.numeric(water_1900[1, 2]) + as.numeric(water_1900[2, 2]), water_1910[2, "Total"]),
+						   Typhoid = c(sum(water_1890$Typhoid), as.numeric(water_1900[4, 2]), water_1910[1, 2]),
+						   Dysentery = c(sum(water_1890$DYSENTERY), as.numeric(water_1900[3, 2]), water_1910[3, 2])
+)
+# water_1890[, Cholera = 
+
+svg(filename = "out/philadelphia_plot%d.svg")
+plot(disease_table$Year, disease_table$Cholera, type = "l", ylim=c(0, 1500), col = "black", xlab = "Year", ylab = "Fatalities")
+lines(disease_table$Year, disease_table$Typhoid, col = "red")
+lines(disease_table$Year, disease_table$Dysentery, col = "green")
+legend(x = "top", legend=c("Cholera", "Typhoid", "Dysentery"), col=c("black", "red", "green"), pch = 15)
+dev.off()
+
 # Custom function to convert columns to numeric, handling non-numeric characters
 if (F) {
     convert_to_numeric <- function(df) {
@@ -136,6 +185,3 @@ if (F) {
     
     sum_waterborne1890
 }
-
-
-

@@ -114,7 +114,7 @@ plot_pipe_disease = function(ward, water)
 
 # Emit plots
 shape = as.data.table(water_shape)
-png(filename = "out/plot%d.png", width = 2000, height = 2000)
+png(filename = "out/baltimore_gis_plot%d.png", width = 2000, height = 2000)
 plot_pipe_density_slice(shape[WaterDate != 0])
 plot_pipe_waterdate(water_shape, ward_shape)
 plot_pipe_disease(ward_shape, water_shape)
