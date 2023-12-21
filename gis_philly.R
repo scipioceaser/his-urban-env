@@ -113,7 +113,7 @@ draw_1910_plot = function()
 
 	ward_table$Water_Borne_1910 = water_borne_1910$WaterBorne
 
-	plot(st_as_sf(ward_table[, c("Water_Borne_1910", "geometry")]), reset = F, main = "Deaths from Cholera, Typhoid, and Malaria in 1890")
+	plot(st_as_sf(ward_table[, c("Water_Borne_1910", "geometry")]), reset = F, main = "Deaths from Cholera, Typhoid, and Malaria in 1910")
 	plot(sewer_shape[, "geometry"], add = T, xaxt = "n")
 }
 
@@ -134,7 +134,7 @@ draw_1890_plot = function()
 
 	ward_shape = st_as_sf(ward_table)
 
-	plot(ward_shape[, c("Water_Borne_1890", "geometry")], reset = F, main = "Deaths from Cholera, Typhoid, and Malaria in 1910")
+	plot(ward_shape[, c("Water_Borne_1890", "geometry")], reset = F, main = "Deaths from Cholera, Typhoid, and Malaria in 1890")
 	plot(sewer_shape[, "geometry"], add = T)
 }
 
