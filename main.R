@@ -1,5 +1,6 @@
 # install.packages("readxl")
 library("readxl")
+library("data.table")
 
 working_dir_setlocal = function()
 {
@@ -18,14 +19,6 @@ rstudio_clear_plots = function()
 
 rstudio_clear_plots()
 working_dir_setlocal()
-
-data = read_excel("data/Baltimore_1910_ScarletFever.xlsx");
-print(data)
-
-# install.packages(c("readxl", "data.table", "dplyr"))
-library("readxl")
-
-library("data.table")
 
 data1890jan = read_excel("data/philadelphia/Philadelphia_1890/1890_WL-SID452,_TID6120,_1890-Philadelphia,_Interments_in_the_City_of_Philadelphia_January_1890,_p358-79.xls")
 data1890feb = read_excel("data/philadelphia/Philadelphia_1890/1890_WL-SID452,_TID6121,_1890-Philadelphia,_Interments_in_the_City_of_Philadelphia_February_1890,_1890,_p382-01.xls")
@@ -88,10 +81,10 @@ water_borne[is.na(water_borne)] <- 0
 water_borne[water_borne == "2....."] = 2
 
 # Transpose the frame (swap rows and columns)
-# Alright, so the 27:59 things is because the ward level data is on columns 29 through 61,
+# Alright, so the 27:60 things is because the ward level data is on columns 29 through 61,
 #       and in the test frame those numbers have had 2 subtracted for some reason.
 #       Fairly, but not absolutely, certain that this is good.
-water_borne_trans = t(water_borne[, 27:59])
+water_borne_trans = t(water_borne[, 27:60])
 
 # Assign column names to diseases
 colnames(water_borne_trans) = water_borne$PHILADELPHIA
