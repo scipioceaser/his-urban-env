@@ -65,9 +65,10 @@ disease_table = data.table("Year" = c(1895, 1905, 1915),
 						   "Measles" = c(totals_1895_extracted[2], measles_1905_total, measles_1915_total),
 						   "Typhoid_Fever" = c(totals_1895_extracted[3], typhoid_1905_total, typhoid_1915_total))
 
-svg(filename = "out/baltimore_plot%d.svg")
+# Exporting as an image because it is easier to insert into Google Docs, if only SVG were a standard format.
+png(filename = "out/baltimore_plot%d.png", width = 512, height = 512)
 plot(disease_table$Year, disease_table$Whooping_Cough, type = "l", ylim=c(0, 200), col = 1, xlab = "Year", ylab = "Fatalities")
 lines(disease_table$Year, disease_table$Measles, col = 2)
 lines(disease_table$Year, disease_table$Typhoid_Fever, col = 3)
-legend(x = "top", legend=c("Whooping Cough", "Measles", "Typhoid Fever"), col=c(1, 2, 3), pch = 15)
+legend(x = "topleft", legend=c("Whooping Cough", "Measles", "Typhoid Fever"), col=c(1, 2, 3), pch = 15)
 dev.off()

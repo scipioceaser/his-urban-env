@@ -138,11 +138,11 @@ disease_table = data.table(Year = c(1890, 1900, 1910),
 )
 # water_1890[, Cholera = 
 
-svg(filename = "out/philadelphia_plot%d.svg")
+png(filename = "out/philadelphia_plot%d.png", width = 512, height = 512)
 plot(disease_table$Year, disease_table$Cholera, type = "l", ylim=c(0, 1500), col = "black", xlab = "Year", ylab = "Fatalities")
 lines(disease_table$Year, disease_table$Typhoid, col = "red")
 lines(disease_table$Year, disease_table$Dysentery, col = "green")
-legend(x = "top", legend=c("Cholera", "Typhoid", "Dysentery"), col=c("black", "red", "green"), pch = 15)
+legend(x = "topleft", legend=c("Cholera", "Typhoid", "Dysentery"), col=c("black", "red", "green"), pch = 15)
 dev.off()
 
 # Custom function to convert columns to numeric, handling non-numeric characters
